@@ -4,10 +4,9 @@
 ```julia
 julia> using Fzf
 julia> a = Fzf.inter_fzf(["a", "b", "c"])
+# interactive session happens here
 "b"
 
-
-# interactive session here
 
 julia> @show a
 a = "b"
