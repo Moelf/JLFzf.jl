@@ -1,4 +1,4 @@
-module Fzf
+module JLFzf
 
 import fzf_jll
 using Pipe
