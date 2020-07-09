@@ -1,9 +1,9 @@
-# Fzf
+# JLFzf
 
 # Example
 ```julia
-julia> using Fzf
-julia> a = Fzf.inter_fzf(["a", "b", "c"])
+julia> using JLFzf
+julia> a = JLFzf.inter_fzf(["a", "b", "c"])
 # interactive session happens here
 "b"
 
@@ -13,4 +13,4 @@ a = "b"
 "b"
 ```
 
-also try `Fzf.inter_fzf(Fzf.read_repl_hist())`
+also try `JLFzf.inter_fzf(Fzf.read_repl_hist())`
