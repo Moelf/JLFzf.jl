@@ -20,7 +20,7 @@ return selected string
 """
 function inter_fzf(in_str::String)
     fzf_jll.fzf() do exe
-        return read(pipeline(`echo $in_str`, `$exe`), String) |> chomp
+        return read(pipeline(`$exe`, stdin = IOBuffer(in_str)), String) |> chomp
     end
 end
 
