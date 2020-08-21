@@ -19,7 +19,6 @@ run interactive fzf and return selected result, `in_str` should contain `\n`s,
 return selected string
 """
 function inter_fzf(in_str::String, args...)
-    @show collect(args)
     fzf_jll.fzf() do exe
         if length(args) == 0
             return read(pipeline(`$exe`, stdin = IOBuffer(in_str)), String) |> chomp
