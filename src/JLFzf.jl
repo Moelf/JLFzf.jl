@@ -23,7 +23,7 @@ function inter_fzf(in_str::String, args...)
         if length(args) == 0
             return read(pipeline(`$exe`, stdin = IOBuffer(in_str)), String) |> chomp
         else
-            return read(pipeline(`$exe $(join(args, " "))`, stdin = IOBuffer(in_str)), String) |> chomp
+            return read(pipeline(`$exe $(join(args, ' '))`, stdin = IOBuffer(in_str)), String) |> chomp
         end
     end
 end
