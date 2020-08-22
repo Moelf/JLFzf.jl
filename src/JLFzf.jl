@@ -18,9 +18,13 @@ inter_fzf(in_str::String)
 run interactive fzf and return selected result, `in_str` should contain `\n`s,
 return selected string
 """
-function inter_fzf(in_str::String)
+function inter_fzf(in_str::String, args...)
     fzf_jll.fzf() do exe
-        return read(pipeline(`$exe`, stdin = IOBuffer(in_str)), String) |> chomp
+        if length(args) == 0
+            return read(pipeline(`$exe`, stdin = IOBuffer(in_str)), String) |> chomp
+        else
+            return read(pipeline(`$exe $(join(args, ' '))`, stdin = IOBuffer(in_str)), String) |> chomp
+        end
     end
 end
 
@@ -28,8 +32,8 @@ end
 inter_fzf(ary::AbstractArray)
 run interactive fzf with an array of inputs, return selected string
 """
-function inter_fzf(ary::AbstractArray)
-    inter_fzf(join(ary, "\n"))
+function inter_fzf(ary::AbstractArray, args...)
+    inter_fzf(join(ary, "\n"), args...)
 end
 
 end
