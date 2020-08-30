@@ -14,3 +14,24 @@ a = "b"
 ```
 
 also try `JLFzf.inter_fzf(Fzf.read_repl_hist())`
+
+## Sample `startup.jl`
+```
+import REPL
+import REPL.LineEdit
+import JLFzf
+const mykeys = Dict{Any,Any}(
+    # primary history search: most recent first
+    "^R" => function (mistate, o, c)
+        line = JLFzf.inter_fzf(JLFzf.read_repl_hist(), "--read0", "--tiebreak=index");
+        JLFzf.insert_history_to_repl(mistate, line)
+    end,
+)
+function customize_keys(repl)
+    repl.interface = REPL.setup_interface(repl; extra_repl_keymap = mykeys)
+end
+atreplinit(customize_keys)
+```
+
+when in REPL, press `Ctril-R` to start a search, `mode` will be automatically switched upon
+selecting search results (`Pkg>`, `Help>` etc.).
