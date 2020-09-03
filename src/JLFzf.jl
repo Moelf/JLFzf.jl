@@ -88,6 +88,7 @@ function insert_history_to_repl(mistate, line)
     else
         LineEdit.edit_insert(mistate, line)
     end
+    LineEdit.refresh_line(mistate)
 end
 
 end
