@@ -56,7 +56,7 @@ Run interactive fzf with an array of inputs, return selected string.
 Additional arguments `args` for `fzf` are allowed.
 """
 function inter_fzf(ary::AbstractArray, args...)
-    inter_fzf(join(ary, '\0'), args...)
+    inter_fzf(join(ary, '\n'), args...)
 end
 
 function edit_insert_and_state_transition(mistate, line, mode)
