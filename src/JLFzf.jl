@@ -66,6 +66,7 @@ function edit_insert_and_state_transition(mistate, line, mode)
         prompt_state = LineEdit.state(mistate, Base.active_repl.interface.modes[mode])
         prompt_state.input_buffer = copy(iobuffer)
     end
+    nothing
 end
 
 """
@@ -77,6 +78,7 @@ function insert_history_to_repl(mistate, line)
     rxh = r"^\?\n"
     rxp = r"^\]\n"
     rxs = r"^;\n"
+    LineEdit.edit_clear(mistate)
     if occursin(rxh, line)
         edit_insert_and_state_transition(mistate, replace(line, rxh => ""), 3)
     elseif occursin(rxp, line)
