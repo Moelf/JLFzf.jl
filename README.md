@@ -27,7 +27,7 @@ const mykeys = Dict{Any,Any}(
     "^R" => function (mistate, o, c)
         line = JLFzf.inter_fzf(JLFzf.read_repl_hist(), 
         "--read0", 
-        "--tiebreak=index"
+        "--tiebreak=index",
         "--height=80%");
         JLFzf.insert_history_to_repl(mistate, line)
     end,
