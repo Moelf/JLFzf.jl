@@ -1,6 +1,6 @@
 # JLFzf
 
-To use Fzf if REPL, you don't have to use this pacakge if you're already a user of [OhMyREPL.jl](https://github.com/KristofferC/OhMyREPL.jl). Keep reading if you want to use Fzf for your own package or don't want to use `OhMyREPL` but still want Fzf search.
+To use Fzf in Julia REPL, you don't have to use this pacakge if you're already a user of [OhMyREPL.jl](https://github.com/KristofferC/OhMyREPL.jl). Keep reading if you want to use Fzf for your own package or don't want to use `OhMyREPL` but still want Fzf search.
 
 # Example
 ```julia
