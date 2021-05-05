@@ -5,8 +5,8 @@ To use Fzf in Julia REPL, you don't have to use this pacakge if you're already a
 # Example
 ```julia
 julia> using JLFzf
-julia> a = JLFzf.inter_fzf(["a", "b", "c"])
-# interactive session happens here
+julia> a = JLFzf.inter_fzf(["a", "b", "c"], "--read0")
+# interactive session happens here, --read0 because we could be searching for multi-line commands in history
 "b"
 
 
