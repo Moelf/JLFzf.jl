@@ -15,7 +15,7 @@ a = "b"
 "b"
 ```
 
-also try `JLFzf.inter_fzf(Fzf.read_repl_hist())`
+also try `JLFzf.inter_fzf(JLFzf.read_repl_hist())`
 
 ## Sample `startup.jl`
 ```
