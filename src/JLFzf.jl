@@ -50,7 +50,7 @@ function inter_fzf(in_str::String, args...)
     else
         readchomp(
             pipeline(
-                Cmd(`$(fzf_jll.fzf()) $(args)`, ignorestatus = true),
+                ignorestatus(`$(fzf_jll.fzf()) $(args)`),
                 stdin = IOBuffer(in_str),
             ),
             String,
