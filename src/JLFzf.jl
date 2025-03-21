@@ -52,7 +52,6 @@ function inter_fzf(in_str::String, args...)
                 ignorestatus(`$(fzf_jll.fzf()) $(args)`),
                 stdin = IOBuffer(in_str),
             ),
-            String,
         )
     end
 end
