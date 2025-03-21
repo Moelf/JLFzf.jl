@@ -46,11 +46,12 @@ end
 """
     inter_fzf(ary::AbstractArray, args...)
 
-Run interactive fzf with an array of inputs, return selected string.
-Additional arguments `args` for `fzf` are allowed.
+Run fzf with an array of inputs delimited by the null '\\0' character.  Additional
+arguments `args` are passed to `fzf`.  This is expected to be used with the
+`--read0` option.
 """
 function inter_fzf(ary::AbstractArray, args...)
-    inter_fzf(join(ary, '\n'), args...)
+    inter_fzf(join(ary, '\0'), args...)
 end
 
 function edit_insert_and_state_transition(mistate, line, mode)
