@@ -42,21 +42,19 @@ return selected string.
 Additional arguments `args` for `fzf` are allowed.
 """
 function inter_fzf(in_str::String, args...)
-    fzf_jll.fzf() do exe
-        if length(args) == 0
-            return read(
-                pipeline(Cmd(`$exe`, ignorestatus = true), stdin = IOBuffer(in_str)),
-                String,
-            ) |> chomp
-        else
-            return read(
-                pipeline(
-                    Cmd(`$exe $(args)`, ignorestatus = true),
-                    stdin = IOBuffer(in_str),
-                ),
-                String,
-            ) |> chomp
-        end
+    if length(args) == 0
+        return read(
+            pipeline(Cmd(`$(fzf_jll.fzf())`, ignorestatus = true), stdin = IOBuffer(in_str)),
+            String,
+        ) |> chomp
+    else
+        return read(
+            pipeline(
+                Cmd(`$(fzf_jll.fzf()) $(args)`, ignorestatus = true),
+                stdin = IOBuffer(in_str),
+            ),
+            String,
+        ) |> chomp
     end
 end
 
