@@ -43,18 +43,18 @@ Additional arguments `args` for `fzf` are allowed.
 """
 function inter_fzf(in_str::String, args...)
     if length(args) == 0
-        return read(
+        readchomp(
             pipeline(Cmd(fzf_jll.fzf(), ignorestatus = true), stdin = IOBuffer(in_str)),
             String,
-        ) |> chomp
+        )
     else
-        return read(
+        readchomp(
             pipeline(
                 Cmd(`$(fzf_jll.fzf()) $(args)`, ignorestatus = true),
                 stdin = IOBuffer(in_str),
             ),
             String,
-        ) |> chomp
+        )
     end
 end
 

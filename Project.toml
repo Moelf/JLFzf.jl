@@ -1,7 +1,7 @@
 name = "JLFzf"
 uuid = "1019f520-868f-41f5-a6de-eb00f4b6a39c"
 authors = ["Moelf <proton@jling.dev> and contributors"]
-version = "0.1.9"
+version = "0.1.10"
 
 [deps]
 Pipe = "b98c9c47-44ae-5843-9183-064241ee97a0"
