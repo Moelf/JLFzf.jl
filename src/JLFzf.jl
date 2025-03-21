@@ -45,7 +45,6 @@ function inter_fzf(in_str::String, args...)
     if length(args) == 0
         readchomp(
             pipeline(ignorestatus(fzf_jll.fzf()), stdin = IOBuffer(in_str)),
-            String,
         )
     else
         readchomp(
