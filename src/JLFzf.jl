@@ -1,7 +1,6 @@
 module JLFzf
 
 import fzf_jll
-using Pipe
 import REPL
 import REPL.LineEdit
 
@@ -20,18 +19,15 @@ function read_repl_hist()
     rxh = r"^# mode: help\n"m => "?\n"
     rxp = r"^# mode: pkg\n"m => "]\n"
     rxs = r"^# mode: shell\n"m => ";\n"
-    @pipe open(REPL.find_hist_file()) |>
-          read |>
-          String |>
-          replace(_, r"\n$" => "") |>           # remove last new line
-          replace(_, r"^\t"m => "") |>          # remove leading tabs
-          replace(_, rxj) |>                    # replace mode with corresponding marker
-          replace(_, rxh) |>                    #
-          replace(_, rxp) |>                    #
-          replace(_, rxs) |>                    #
-          split(_, rx, keepempty = false) |>    # split by history records
-          reverse |>
-          unique                     # keep unique entries
+    str = open(io -> read(io, String), REPL.find_hist_file())
+    str = replace(str, r"\n$" => "")  # remove last new line
+    str = replace(str, r"^\t"m => "")  # remove leading tabs
+    str = replace(str, rxj)
+    str = replace(str, rxh)
+    str = replace(str, rxp)
+    str = replace(str, rxs)
+    str = split(str, rx, keepempty=false)
+    unique(reverse(str))
 end
 
 """
@@ -42,29 +38,17 @@ return selected string.
 Additional arguments `args` for `fzf` are allowed.
 """
 function inter_fzf(in_str::String, args...)
-    fzf_jll.fzf() do exe
-        if length(args) == 0
-            return read(
-                pipeline(Cmd(`$exe`, ignorestatus = true), stdin = IOBuffer(in_str)),
-                String,
-            ) |> chomp
-        else
-            return read(
-                pipeline(
-                    Cmd(`$exe $(args)`, ignorestatus = true),
-                    stdin = IOBuffer(in_str),
-                ),
-                String,
-            ) |> chomp
-        end
-    end
+    cmd = length(args) == 0 ? fzf_jll.fzf() : `$(fzf_jll.fzf()) $(args)`
+    pipe = pipeline(ignorestatus(cmd), stdin=IOBuffer(in_str))
+    readchomp(pipe)
 end
 
 """
     inter_fzf(ary::AbstractArray, args...)
 
-Run interactive fzf with an array of inputs, return selected string.
-Additional arguments `args` for `fzf` are allowed.
+Run fzf with an array of inputs delimited by the null '\\0' character.  Additional
+arguments `args` are passed to `fzf`.  This is expected to be used with the
+`--read0` option.
 """
 function inter_fzf(ary::AbstractArray, args...)
     inter_fzf(join(ary, '\0'), args...)

@@ -1,4 +1,4 @@
-using Fzf
+using JLFzf
 using Test
 
 @testset "Fzf.jl" begin
