@@ -1,7 +1,7 @@
 name = "JLFzf"
 uuid = "1019f520-868f-41f5-a6de-eb00f4b6a39c"
 authors = ["Moelf <proton@jling.dev> and contributors"]
-version = "0.1.10"
+version = "0.1.11"
 
 [deps]
 REPL = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
@@ -9,7 +9,7 @@ Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 fzf_jll = "214eeab7-80f7-51ab-84ad-2988db7cef09"
 
 [compat]
-fzf_jll = "0.29, 0.30, 0.34, 0.35, 0.43, 0.49, 0.53, 0.56"
+fzf_jll = "0.29, 0.30, 0.34, 0.35, 0.43, 0.49, 0.53, 0.56, 0.61"
 julia = "1"
 
 [extras]
